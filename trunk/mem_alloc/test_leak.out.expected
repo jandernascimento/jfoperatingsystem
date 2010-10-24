@@ -1,0 +1,593 @@
+Memory : [0 1073943168] (65536 bytes)
+Free block : 8 bytes; busy block : 4 bytes.
+ALLOC at : 4 (5 byte(s))
+ALLOC at : 13 (10 byte(s))
+ALLOC at : 27 (5 byte(s))
+ALLOC at : 36 (10 byte(s))
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 59 (10 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 82 (10 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 105 (10 byte(s))
+ALLOC at : 119 (5 byte(s))
+ALLOC at : 128 (10 byte(s))
+ALLOC at : 142 (5 byte(s))
+ALLOC at : 151 (10 byte(s))
+FREE  at : 142 
+Begin of free block list :
+Free block at address 138, size 9
+Free block at address 161, size 65375
+ALLOC at : 142 (5 byte(s))
+FREE  at : 142 
+Begin of free block list :
+Free block at address 138, size 9
+Free block at address 161, size 65375
+FREE  at : 151 
+Begin of free block list :
+Free block at address 138, size 65398
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 138, size 65398
+ALLOC at : 119 (5 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 138, size 65398
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 65398
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 119 (5 byte(s))
+ALLOC at : 142 (10 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 152, size 65384
+ALLOC at : 119 (5 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 152, size 65384
+FREE  at : 142 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 138, size 65398
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 65398
+FREE  at : 105 
+Begin of free block list :
+Free block at address 92, size 32
+Free block at address 138, size 65398
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 32
+Free block at address 138, size 65398
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 105 (10 byte(s))
+ALLOC at : 119 (5 byte(s))
+ALLOC at : 142 (10 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 152, size 65384
+ALLOC at : 119 (5 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 152, size 65384
+FREE  at : 142 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 138, size 65398
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 65398
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 65398
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 65398
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 65398
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 142 (10 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 156 (10 byte(s))
+ALLOC at : 119 (5 byte(s))
+ALLOC at : 170 (10 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 180, size 65356
+ALLOC at : 119 (5 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 170 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 166, size 65370
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 166, size 65370
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 166, size 65370
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 166, size 65370
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 170 (10 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 170 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 166, size 65370
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 166, size 65370
+FREE  at : 142 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 14
+Free block at address 166, size 65370
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 14
+Free block at address 166, size 65370
+FREE  at : 59 
+Begin of free block list :
+Free block at address 46, size 32
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 14
+Free block at address 166, size 65370
+FREE  at : 27 
+Begin of free block list :
+Free block at address 23, size 9
+Free block at address 46, size 32
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 14
+Free block at address 166, size 65370
+ALLOC at : 27 (5 byte(s))
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 59 (10 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 142 (10 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 170 (10 byte(s))
+ALLOC at : 119 (5 byte(s))
+ALLOC at : 184 (10 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 194, size 65342
+ALLOC at : 119 (5 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 194, size 65342
+FREE  at : 184 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 184 (10 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 194, size 65342
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 194, size 65342
+FREE  at : 184 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 142 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 14
+Free block at address 180, size 65356
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 138, size 14
+Free block at address 180, size 65356
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 142 (10 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 184 (10 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 194, size 65342
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 194, size 65342
+FREE  at : 184 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+ALLOC at : 73 (5 byte(s))
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 27 
+Begin of free block list :
+Free block at address 23, size 9
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+FREE  at : 4 
+Begin of free block list :
+Free block at address 0, size 9
+Free block at address 23, size 9
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 65356
+ALLOC at : 4 (5 byte(s))
+ALLOC at : 27 (5 byte(s))
+ALLOC at : 184 (10 byte(s))
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 198 (10 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 212 (10 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 226 (10 byte(s))
+ALLOC at : 119 (5 byte(s))
+ALLOC at : 240 (10 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 250, size 65286
+ALLOC at : 119 (5 byte(s))
+FREE  at : 119 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 250, size 65286
+FREE  at : 240 
+Begin of free block list :
+Free block at address 115, size 9
+Free block at address 236, size 65300
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 240 (10 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 250, size 65286
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 250, size 65286
+FREE  at : 240 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+FREE  at : 212 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 208, size 14
+Free block at address 236, size 65300
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 208, size 14
+Free block at address 236, size 65300
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 212 (10 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 240 (10 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 250, size 65286
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 250, size 65286
+FREE  at : 240 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+ALLOC at : 73 (5 byte(s))
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+FREE  at : 27 
+Begin of free block list :
+Free block at address 23, size 9
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 65300
+ALLOC at : 27 (5 byte(s))
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 240 (10 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 254 (10 byte(s))
+ALLOC at : 96 (5 byte(s))
+ALLOC at : 268 (10 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 278, size 65258
+ALLOC at : 96 (5 byte(s))
+FREE  at : 96 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 278, size 65258
+FREE  at : 268 
+Begin of free block list :
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 264, size 65272
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 264, size 65272
+ALLOC at : 73 (5 byte(s))
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 264, size 65272
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 264, size 65272
+ALLOC at : 50 (5 byte(s))
+ALLOC at : 73 (5 byte(s))
+ALLOC at : 268 (10 byte(s))
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 278, size 65258
+ALLOC at : 73 (5 byte(s))
+FREE  at : 73 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 278, size 65258
+FREE  at : 268 
+Begin of free block list :
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 264, size 65272
+FREE  at : 50 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 264, size 65272
+FREE  at : 240 
+Begin of free block list :
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 14
+Free block at address 264, size 65272
+FREE  at : 27 
+Begin of free block list :
+Free block at address 23, size 9
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 236, size 14
+Free block at address 264, size 65272
+FREE  at : 184 
+Begin of free block list :
+Free block at address 23, size 9
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 14
+Free block at address 236, size 14
+Free block at address 264, size 65272
+FREE  at : 4 
+Begin of free block list :
+Free block at address 0, size 9
+Free block at address 23, size 9
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 14
+Free block at address 236, size 14
+Free block at address 264, size 65272
+FREE  at : 13 
+Begin of free block list :
+Free block at address 0, size 32
+Free block at address 46, size 9
+Free block at address 69, size 9
+Free block at address 92, size 9
+Free block at address 115, size 9
+Free block at address 180, size 14
+Free block at address 236, size 14
+Free block at address 264, size 65272
