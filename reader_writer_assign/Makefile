@@ -1,12 +1,12 @@
 CC=gcc
 CFLAGS=-g -Wall -Werror
-LDFLAGS=-lpthread 
+LDFLAGS=-lpthread
 
 
 SOURCES=linked_list.c reader_writer_tracing.c 
 READER_WRITER=$(wildcard reader_writer_?.c)
 
-OBJS=$(SOURCES:.c=.o) 
+OBJS=$(SOURCES:.c=.o)
 
 
 TEST_SRC=$(wildcard *_test.c)
@@ -15,7 +15,7 @@ TEST_BIN+=$(TEST_SRC:.c=_0)
 TEST_BIN+=$(TEST_SRC:.c=_0)
 
 #Uncomment when you wrote reader_writer_1.c (part 1)
-#TEST_BIN+=$(TEST_SRC:.c=_1)
+TEST_BIN+=$(TEST_SRC:.c=_1)
 
 #Uncomment when you wrote reader_writer_2.c (part 2)
 #TEST_BIN+=$(TEST_SRC:.c=_2)
