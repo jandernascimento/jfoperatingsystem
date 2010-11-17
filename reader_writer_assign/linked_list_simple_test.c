@@ -59,7 +59,7 @@ int main(int argc, char **argv){
   tracing_register_event(t, BR_EVENT_ID, "BEGIN READ");
   tracing_register_event(t, ER_EVENT_ID, "END READ");
   tracing_register_event(t, BW_EVENT_ID, "BEGIN WRITE");
-  tracing_register_event(t, EW_EVENT_ID, "END READ");
+  tracing_register_event(t, EW_EVENT_ID, "END WRITE");
 
   /*** Thread creation ***/
   pthread_t *tids = malloc(sizeof(pthread_t) * nb_threads -1); 
