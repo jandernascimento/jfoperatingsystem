@@ -2,6 +2,7 @@ CC=gcc
 CFLAGS=-g -Wall -Werror
 LDFLAGS=-lpthread 
 
+
 SOURCES=linked_list.c reader_writer_tracing.c 
 READER_WRITER=$(wildcard reader_writer_?.c)
 
