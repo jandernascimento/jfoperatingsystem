@@ -3,6 +3,7 @@
 #include "linked_list.h"
 
 void list_init(struct linked_list_head *list) {  
+  init(list->sync); 
   list->head=NULL;
 }
 
