@@ -23,6 +23,7 @@ typedef struct{
   char **events_names;
 }tracing_s, *tracing_t; 
 
+char *tracing_event_to_string(tracing_t tracing, int event_id, char *buf, int buf_size);
 
 void tracing_init(tracing_t tracing, int nb_threads); 
 
@@ -61,6 +62,8 @@ int tracing_compare_event_date(event_t e1, event_t e2);
 
 /* Prints all recorded events sorted by occuring time */ 
 void print_all_events_per_date(tracing_t tracing); 
+
+void check_error(tracing_t tracing,void (*callback)(int a ,int b));
 
 /* Prints all recorded events sorted by thread id */ 
 void print_all_events_per_thread(tracing_t tracing); 
