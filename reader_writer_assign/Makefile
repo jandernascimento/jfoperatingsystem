@@ -12,7 +12,7 @@ OBJS=$(SOURCES:.c=.o)
 TEST_SRC=$(wildcard *_test.c)
 TEST_BIN+=$(TEST_SRC:.c=_0)
 
-TEST_BIN+=$(TEST_SRC:.c=_0)
+TEST_BIN+=$(TEST_SRC:.c=_2)
 
 #Uncomment when you wrote reader_writer_1.c (part 1)
 TEST_BIN+=$(TEST_SRC:.c=_1)
