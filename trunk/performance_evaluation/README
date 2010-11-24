@@ -1,0 +1,15 @@
+
+Parallel sort
+
+To build the programs run
+./configure
+make
+
+See options of 
+
+./sort_seq
+
+and
+
+./sort_par
+
