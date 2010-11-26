@@ -34,7 +34,6 @@ void *thread_func(void *a){
 }
 
 void tst(int current, int previous){
-
 	switch(current){
 		case BR_EVENT_ID:
 		break;
@@ -43,14 +42,12 @@ void tst(int current, int previous){
 		case BW_EVENT_ID:
 		break;
 		case EW_EVENT_ID:
-			if(previous==BR_EVENT_ID||previous==ER_EVENT_ID){
-				printf("ERROR!");
+			if(previous=!BW_EVENT_ID){
+				printf("\nERROR!\n");
 				exit(EXIT_FAILURE);
 			}
 		break;
 	}
-
-
 }
 
 int main(int argc, char **argv){
@@ -97,13 +94,9 @@ int main(int argc, char **argv){
 
 /** CHECK: BEGIN **/
 
-
 check_error(&tracing,&tst);
 
-
 /** CHECK: END **/
-
-  //print_all_events_per_date(t); 
-
-  exit(EXIT_FAILURE); 
+//print_all_events_per_date(t); 
+//  exit(EXIT_FAILURE); 
 }
