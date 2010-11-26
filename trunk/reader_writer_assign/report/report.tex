@@ -1,0 +1,86 @@
+\documentclass{article}
+\begin{document}
+
+\title{Synchronization with monitors}
+
+\author{Laurent Graebner,
+\and Jander Nascimento, 
+\and Lam }
+
+\maketitle
+
+\tableofcontents
+
+\section{Implementing Thread-safe linked list}          
+
+
+
+\subsection{Validity of the first test}
+
+The first test implemented will not fail duo do its verification. The test was written
+to catch up situations where the simultaneos change would generate a conflict case and
+the programming running end up in a \textit{deadlock}.
+This test is completely valid, but the \textit{deadlock} does not happens constantly with 
+this implementation so we may say that the test is not effective.
+
+\subsection{Analyzing the first test output}
+
+Output:
+
+\begin{enumerate}
+      \item Thread nmbr 0, won.
+      \item Thread nmbr 1, won.
+      \item THREAD 0 TIME: +0s 0.040ms, TYPE : BEGIN WRITE
+      \item THREAD 0 TIME: +0s 0.041ms, TYPE : END READ
+      \item THREAD 0 TIME: +0s 0.041ms, TYPE : BEGIN READ
+      \item THREAD 0 TIME: +0s 0.041ms, TYPE : END READ
+      \item THREAD 0 TIME: +0s 0.041ms, TYPE : BEGIN WRITE
+      \item THREAD 0 TIME: +0s 0.041ms, TYPE : END READ
+      \item THREAD 0 TIME: +0s 0.041ms, TYPE : BEGIN READ
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN WRITE
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN READ
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN WRITE
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+      \item THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN READ
+      \item THREAD 0 TIME: +0s 0.043ms, TYPE : END READ
+      \item THREAD 1 TIME: +0s 0.094ms, TYPE : BEGIN WRITE
+      \item THREAD 1 TIME: +0s 0.097ms, TYPE : END READ
+      \item THREAD 1 TIME: +0s 0.097ms, TYPE : BEGIN READ
+      \item THREAD 1 TIME: +0s 0.098ms, TYPE : END READ   
+\end{enumerate}
+
+The consistency of the call can be analyzed looking at three parameters: the identifier of 
+the thread, type of the call and the order in which they appear in the output.
+
+For instance, using this output we may infer that there is two threads (and the subject says 
+that to us:), analysing the thread 0 (zero) it's possible to see that between write operations
+it's possible to have read operations.
+
+\subsection{Naive implementation, using mutexes}
+
+code
+
+\subsection{Naive implementation test}
+
+code
+
+\subsection{Efficiency of naive implementation}
+
+This kind of implementation has the same result as a serialization of all operations, since 
+only one thread can access the code at a time. That is the main reason why this kind of 
+implementation is safe.
+
+\section{Improving concurrency}
+
+\subsection{Improving concurrency capability}
+
+code
+
+\subsection{Improving concurrency test}
+
+code
+
+\end{document}
