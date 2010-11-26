@@ -4,7 +4,7 @@ CFLAGS=-g -Wall
 LDFLAGS=-lpthread
 
 
-SOURCES=linked_list.c reader_writer_tracing.c 
+SOURCES=linked_list.c reader_writer_tracing.c
 READER_WRITER=$(wildcard reader_writer_?.c)
 
 OBJS=$(SOURCES:.c=.o)
@@ -20,7 +20,7 @@ TEST_BIN+=$(TEST_SRC:.c=_1)
 TEST_BIN+=$(TEST_SRC:.c=_2)
 
 #Uncomment when you wrote reader_writer_3.c (part 3)
-#TEST_BIN+=$(TEST_SRC:.c=_3)
+TEST_BIN+=$(TEST_SRC:.c=_3)
 
 build_all_tests:$(TEST_BIN)
 
