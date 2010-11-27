@@ -36,5 +36,18 @@ build_all_tests:$(TEST_BIN)
 %_test_3:%_test.o $(OBJS) reader_writer_3.o
 	$(CC) $(LDFLAGS) $^ -o $@
 
+build: clean report
+	test -d bin/assignment_two/report || mkdir -p bin/assignment_two/report
+	-cp * bin/assignment_two/
+	-mv ./report.pdf bin/assignment_two/report
+	tar -cvzf bin/assignment_two.tar.gz -C bin/ assignment_two
+
+report: 
+	-pdflatex report.tex
+	rm report.aux report.log report.toc 	
+
 clean:
 	rm -rf	echo *.o $(TEST_BIN)
+	rm -rf	bin/
+
+.PHONY: clean report
