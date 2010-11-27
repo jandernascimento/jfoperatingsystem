@@ -258,7 +258,7 @@ void simpler_log(tracing_t tracing,void (*callback)(sevent_t events,int size)){
 	     sevent_index,min_idx, tv_to_string(&tv, buf, 64));
       printf("%s\n", tracing_event_to_string(tracing, tracing->events[min_idx][current_idx[min_idx]].type, buf, 64));
       events[sevent_index].thread=min_idx;
-      events[sevent_index].event=tracing->events[min_idx][current_idx[min_idx]].type;
+      events[sevent_index].event=current;
 
       previous=tracing->events[min_idx][current_idx[min_idx]].type;
       current_idx[min_idx]++; 
