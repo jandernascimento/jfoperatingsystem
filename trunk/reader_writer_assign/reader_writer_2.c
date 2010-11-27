@@ -46,7 +46,7 @@ void end_read(reader_writer_t rw){
 void begin_write(reader_writer_t rw){
   /* ... */
   pthread_mutex_lock(&condition_mutex);
-  while (writing == 1 && reading==0) {
+  while (writing == 1 || reading>0) {
     pthread_cond_wait(&condition, &condition_mutex);
   }
   pthread_mutex_lock(&mutex);
