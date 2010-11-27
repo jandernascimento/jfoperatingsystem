@@ -23,7 +23,6 @@ void *thread_func(void *a){
   /* mandatory ! */
   tracing_register_thread(t, id); 
   int i ;
-  sleep(1);
   for(i = 0; i < 10; i++){
     list_insert(&list, rand()%10); 
     if(list_exists(&list, id)){
