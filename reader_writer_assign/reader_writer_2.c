@@ -17,7 +17,6 @@ void init(reader_writer_t rw){
 }
 
 void begin_read(reader_writer_t rw){
-  /* ... */
   pthread_mutex_lock(&condition_mutex);
   while (writing == 1) {
     pthread_cond_wait(&condition, &condition_mutex);
@@ -27,12 +26,9 @@ void begin_read(reader_writer_t rw){
   tracing_record_event(t, BR_EVENT_ID);
   pthread_mutex_unlock(&mutex);
   pthread_mutex_unlock(&condition_mutex);
-
-  /* ... */
 }
 
 void end_read(reader_writer_t rw){
-  /* ... */
   pthread_mutex_lock(&condition_mutex);
   pthread_mutex_lock(&mutex);
   tracing_record_event(t, ER_EVENT_ID);
@@ -40,11 +36,9 @@ void end_read(reader_writer_t rw){
   pthread_mutex_unlock(&mutex);
   pthread_cond_signal(&condition);
   pthread_mutex_unlock(&condition_mutex);
-  /* ... */
 }
 
 void begin_write(reader_writer_t rw){
-  /* ... */
   pthread_mutex_lock(&condition_mutex);
   while (writing == 1 || reading>0) {
     pthread_cond_wait(&condition, &condition_mutex);
@@ -54,11 +48,9 @@ void begin_write(reader_writer_t rw){
   tracing_record_event(t, BW_EVENT_ID);
   pthread_mutex_unlock(&mutex);
   pthread_mutex_unlock(&condition_mutex);
-  /* ... */
 }
 
 void end_write(reader_writer_t rw){
-  /* ... */
   pthread_mutex_lock(&condition_mutex);
   pthread_mutex_lock(&mutex);
   tracing_record_event(t, EW_EVENT_ID);
@@ -66,6 +58,5 @@ void end_write(reader_writer_t rw){
   pthread_mutex_unlock(&mutex);
   pthread_cond_signal(&condition);
   pthread_mutex_unlock(&condition_mutex);
-  /* ... */
 }
 
