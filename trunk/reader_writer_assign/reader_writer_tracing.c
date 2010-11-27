@@ -254,8 +254,8 @@ void simpler_log(tracing_t tracing,void (*callback)(sevent_t events,int size)){
       struct timeval tv = tv_minus(min, tracing->initial_time); 
 
       int current=tracing->events[min_idx][current_idx[min_idx]].type;      
-      printf("THREAD %d TIME: +%s, TYPE : ", 
-	     min_idx, tv_to_string(&tv, buf, 64));
+      printf("#%i THREAD %d TIME: +%s, TYPE : ", 
+	     sevent_index,min_idx, tv_to_string(&tv, buf, 64));
       printf("%s\n", tracing_event_to_string(tracing, tracing->events[min_idx][current_idx[min_idx]].type, buf, 64));
       events[sevent_index].thread=min_idx;
       events[sevent_index].event=tracing->events[min_idx][current_idx[min_idx]].type;
