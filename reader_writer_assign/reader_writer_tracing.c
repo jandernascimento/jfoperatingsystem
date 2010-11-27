@@ -204,21 +204,15 @@ void check_error(tracing_t tracing,void (*callback)(int a ,int b)){
     }
     if(min_idx != -1){
       char buf[64]; 
-      char buf2[64]; 
-      /* computes time relatives to call to tracing_init() call */
+
       struct timeval tv = tv_minus(min, tracing->initial_time); 
-      //printf("THREAD %d TIME: +%s, TYPE : ", min_idx, tv_to_string(&tv, buf, 64));
-      int current=tracing->events[min_idx][current_idx[min_idx]].type;
-      //printf("CURRENT: %s ", tracing_event_to_string(tracing, current, buf, 64));
-      //if(previous!=-1) printf("PREVIOUS: %s \n", tracing_event_to_string(tracing, previous, buf2, 64));
-      //else printf("\n");
-	//printf("%s\n", tracing_event_to_string(tracing, tracing->events[min_idx][current_idx[min_idx]].type, buf, 64));
-      //if(previous!=-1) printf(" PREVIOUS:%s\n", tracing_event_to_string(tracing, previous, buf, 64));
-      
+
+      int current=tracing->events[min_idx][current_idx[min_idx]].type;      
       printf("THREAD %d TIME: +%s, TYPE : ", 
 	     min_idx, tv_to_string(&tv, buf, 64));
       printf("%s\n", tracing_event_to_string(tracing, tracing->events[min_idx][current_idx[min_idx]].type, buf, 64));
 
+      //This is my callback function
       (*callback)(current,previous);
       previous=tracing->events[min_idx][current_idx[min_idx]].type;
       current_idx[min_idx]++; 
@@ -227,5 +221,56 @@ void check_error(tracing_t tracing,void (*callback)(int a ,int b)){
       break; 
     }
   }
+}
+
+void simpler_log(tracing_t tracing,void (*callback)(sevent_t events,int size)){
+  int i;   
+  
+  int *current_idx = calloc(tracing->nb_threads, sizeof(int)); 
+  sevent_t events = malloc(sizeof(sevent_s)*tracing->nb_threads*10);
+
+  struct timeval min; 
+  int min_idx; 
+
+  int previous=-1;
+
+  int sevent_index=0;
+
+  for(;;){
+  min.tv_sec = LONG_MAX; min.tv_usec = 0;
+  min_idx = -1; 
+    for(i = 0; i < tracing->nb_threads; i++){
+      if(current_idx[i] < tracing->events_last_idx[i]){
+	struct timeval current = tracing->events[i][current_idx[i]].time; 
+	if(tv_lt(current, min)){
+	  min = current; 
+	  min_idx = i; 
+	}
+      }
+    }
+    if(min_idx != -1){
+      char buf[64]; 
+
+      struct timeval tv = tv_minus(min, tracing->initial_time); 
+
+      int current=tracing->events[min_idx][current_idx[min_idx]].type;      
+      printf("THREAD %d TIME: +%s, TYPE : ", 
+	     min_idx, tv_to_string(&tv, buf, 64));
+      printf("%s\n", tracing_event_to_string(tracing, tracing->events[min_idx][current_idx[min_idx]].type, buf, 64));
+      events[sevent_index].thread=min_idx;
+      events[sevent_index].event=tracing->events[min_idx][current_idx[min_idx]].type;
+
+      previous=tracing->events[min_idx][current_idx[min_idx]].type;
+      current_idx[min_idx]++; 
+      sevent_index++;
+    }
+    else{
+      break; 
+    }
+  }
+
+  //This is my callback function
+ (*callback)(events,sevent_index);
+
 }
 
