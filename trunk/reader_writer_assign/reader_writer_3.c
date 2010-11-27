@@ -109,7 +109,6 @@ void resetPriorities(int tid) {
         } else {
             ptr->priority++;
             printf("resetPriorities: %x increased to %d\n", (unsigned int) ptr->tid, ptr->priority);
-
         }
 
         ptr = ptr->next;
@@ -137,7 +136,6 @@ thread_info_t addThreadInfo(int tid) {
 }
 
 thread_info_t findThreadInfo(int tid) {
-    printf("BEGIN findThreadInfo()\n");
     thread_info_t ptr = threadinfos;
     while (ptr != NULL) {
         if (ptr->tid == tid) {
@@ -163,23 +161,25 @@ void removeThreadInfo(int tid) {
     printf("BEGIN removeThreadInfo()\n");
     thread_info_t ptr = threadinfos, prev_ptr = NULL;
     if (ptr != NULL) {
-        while (ptr->next != NULL) {
-            prev_ptr = ptr;
-            ptr = ptr->next;
+        while (ptr != NULL) {
+            printf("removeThreadInfo(): List-Traversion: currently in listitem of Thread %x\n", (unsigned int) ptr->tid);
             if (ptr->tid == tid) {
                 printf("removeThreadInfo(): Will remove listitem of Thread %x\n", (unsigned int) tid);
                 if (prev_ptr == NULL) {
                     threadinfos = ptr->next;
-                    return;
+                } else {
+                    prev_ptr->next = ptr->next;
+                    free(ptr);
                 }
-                prev_ptr->next = ptr->next;
-                free(ptr);
+                printf("END removeThreadInfo()\n");
                 return;
             }
+            prev_ptr = ptr;
+            ptr = ptr->next;
         }
-        printf("removeThreadInfo(): Didn't find any listitem to be removed for Thread %x", (unsigned int) tid);
+
     }
-    printf("END removeThreadInfo()\n");
+    printf("ERROR: removeThreadInfo(): Didn't find any item to remove for Thread %x\n", (unsigned int) tid);
 }
 
 int hasHighestPriority(int tid) {
