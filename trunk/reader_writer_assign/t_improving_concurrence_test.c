@@ -23,6 +23,7 @@ void *thread_func(void *a){
   /* mandatory ! */
   tracing_register_thread(t, id); 
   int i ;
+  sleep(1);
   for(i = 0; i < 10; i++){
     list_insert(&list, rand()%10); 
     if(list_exists(&list, id)){
@@ -40,26 +41,41 @@ void *thread_func(void *a){
 void tst(sevent_t events, int size){
 
 	int x;
+	//counter for sequencial BR
+	int seq_BR_counter=0;
+	//counter for sequencial ER
+	int seq_ER_counter=0;
 	for(x=0;x<size;x++){
 
 		int event=events[x].event;
 		int thread=events[x].thread;
-		
+
 		if(event==ER_EVENT_ID||event==EW_EVENT_ID) continue;
 
 		//Case an event begin read, the next must be end event end read for the same thread
 		if(event==BR_EVENT_ID){
-			int k;
+			int k=0;
+
+			//There MUST NOT exist a write in reads
 			for(k=x+1;k<size;k++){
-				if(events[k].event==BW_EVENT_ID || events[k].event==BW_EVENT_ID ){
-					printf("Test FAIL at line #%i!\n",k);
-				}	
-				if(events[k].thread==thread && events[k].event==ER_EVENT_ID) break;	
+				
+				if(events[k].event==ER_EVENT_ID) break;	
+				
+				if(events[k].event==BW_EVENT_ID || events[k].event==EW_EVENT_ID ){
+					printf("Test FAIL at line #%i\n",x);
+					exit(EXIT_FAILURE);
+				}
 			}
-			//if(events[x+1].thread!=thread||events[x+1].event!=ER_EVENT_ID){
-			//	printf("Test FAIL at line #%i!\n",x);
-			//	exit(EXIT_FAILURE);
-			//}
+			
+			//Counts the sequencial readings
+			if(events[x+1].event==event && event==BR_EVENT_ID){
+				seq_BR_counter++;
+			}
+			if(events[x+1].event==event && event==ER_EVENT_ID){
+				seq_ER_counter++;
+			}
+
+
 		}	
 		//Case an event begin write, the next must be end event end write for the same thwrite
 		if(event==BW_EVENT_ID){
@@ -68,7 +84,14 @@ void tst(sevent_t events, int size){
 				exit(EXIT_FAILURE);
 			}
 		}
+	
 	}
+
+	if(seq_BR_counter<2 && seq_ER_counter<2){
+		printf("FAIL! No double readings, the output does not proof that multiples readings are allowed!\n");
+		exit(EXIT_FAILURE);
+	}
+
 
 
 }
