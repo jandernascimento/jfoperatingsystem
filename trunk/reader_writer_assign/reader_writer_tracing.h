@@ -8,6 +8,12 @@
 #define MAX_EVENTS_PER_THREADS 65536
 #define MAX_EVENTS 16
 
+typedef struct{
+
+  int thread;
+  int event;
+
+} sevent_s, *sevent_t; 
 
 typedef struct{
   struct timeval time; /* time stamp (see man gettimeofday)*/
@@ -64,6 +70,8 @@ int tracing_compare_event_date(event_t e1, event_t e2);
 void print_all_events_per_date(tracing_t tracing); 
 
 void check_error(tracing_t tracing,void (*callback)(int a ,int b));
+
+void simpler_log(tracing_t tracing,void (*callback)(sevent_t events,int size));
 
 /* Prints all recorded events sorted by thread id */ 
 void print_all_events_per_thread(tracing_t tracing); 
