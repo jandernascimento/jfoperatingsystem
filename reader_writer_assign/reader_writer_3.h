@@ -10,11 +10,11 @@ typedef struct{
 
 }reader_writer_s, *reader_writer_t;
 
-typedef struct{
-    int tid;
-    int priority;
-    struct thread_info_s *next;
-}thread_info_s, *thread_info_t;
+//typedef struct{
+//    int tid;
+//    int priority;
+//    struct thread_info_s *next;
+//}thread_info_s, *thread_info_t;
 
 //typedef struct{
 //    int tid;
@@ -22,6 +22,15 @@ typedef struct{
 //    int writes;
 //    struct thread_stats_s *next;
 //}thread_stats_s, *thread_stats_t;
+
+typedef struct {
+    int tid;
+    struct waiting_thread_s *next;
+} waiting_thread_s, *waiting_thread_t;
+
+typedef struct {
+    waiting_thread_t first_thread;
+} thread_queue_s, *thread_queue_t;
 
 void init(reader_writer_t rw);
 
