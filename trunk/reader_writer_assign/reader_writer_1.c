@@ -15,8 +15,8 @@ void begin_read(reader_writer_t rw){
 }
 
 void end_read(reader_writer_t rw){
-  pthread_mutex_unlock( &mutex );
   tracing_record_event(t, ER_EVENT_ID);
+  pthread_mutex_unlock( &mutex );
 }
 
 void begin_write(reader_writer_t rw){
@@ -25,7 +25,7 @@ void begin_write(reader_writer_t rw){
 }
 
 void end_write(reader_writer_t rw){
-  pthread_mutex_unlock( &mutex );
   tracing_record_event(t, EW_EVENT_ID);
+  pthread_mutex_unlock( &mutex );
 }
 

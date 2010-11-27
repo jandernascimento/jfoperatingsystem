@@ -37,47 +37,28 @@ void *thread_func(void *a){
 //ER_EVENT_ID 1
 //BW_EVENT_ID 2
 //EW_EVENT_ID 3
-void concurrence_tst(sevent_t events, int size){
+void naive_tst(sevent_t events, int size){
 	int x;
-	//counter for sequencial BR
-	int seq_BR_counter=0;
-	//counter for sequencial ER
-	int seq_ER_counter=0;
 	for(x=0;x<size;x++){
 		int event=events[x].event;
 		int thread=events[x].thread;
+		//In case of an ER/ER just ignore the line, 
+		//they are going to be evaluated by BR/BW
 		if(event==ER_EVENT_ID||event==EW_EVENT_ID) continue;
-		//Case an event begin read, the next must be end event end read for the same thread
+		//an event BR MUST BE followed by a ER
 		if(event==BR_EVENT_ID){
-			int k=0;
-			//There MUST NOT exist a write in reads
-			for(k=x+1;k<size;k++){
-				if(events[k].event==ER_EVENT_ID) break;		
-				if(events[k].event==BW_EVENT_ID || events[k].event==EW_EVENT_ID ){
-					printf("Test FAIL at line #%i\n",x);
-					exit(EXIT_FAILURE);
-				}
-			}
-			//Counts the sequencial readings
-			if(events[x+1].event==event && event==BR_EVENT_ID){
-				seq_BR_counter++;
-			}
-			if(events[x+1].event==event && event==ER_EVENT_ID){
-				seq_ER_counter++;
+			if(events[x+1].thread!=thread || events[x+1].event!=ER_EVENT_ID){
+				printf("Test FAIL at line #%i!\n",x);
+				exit(EXIT_FAILURE);
 			}
 		}	
-		//Case an event begin write, the next must be end event end write for the same thwrite
+		//an event BW MUST BE followed by a EW
 		if(event==BW_EVENT_ID){
-			if(events[x+1].thread!=thread||events[x+1].event!=EW_EVENT_ID){
+			if(events[x+1].thread!=thread || events[x+1].event!=EW_EVENT_ID){
 				printf("Test FAIL at line #%i!\n",x);
 				exit(EXIT_FAILURE);
 			}
 		}
-	}
-	//MUST exist at least one multiple reading
-	if(seq_BR_counter<2 && seq_ER_counter<2){
-		printf("FAIL! No double readings, the output does not proof that multiples readings are allowed!\n");
-		exit(EXIT_FAILURE);
 	}
 }
 
@@ -123,8 +104,7 @@ int main(int argc, char **argv){
     pthread_join(tids[i], NULL); 
   }
 
-  simpler_log(&tracing,&concurrence_tst);
+  simpler_log(&tracing,&naive_tst);
 
-  exit(EXIT_SUCCESS);
-
+  exit(EXIT_SUCCESS); 
 }

@@ -1,0 +1,246 @@
+\documentclass{article}
+
+\usepackage{listings}
+\usepackage{color}
+
+\lstset{numbersep=5pt,numbers=left,numberstyle=\footnotesize,title=\lstname,basicstyle=\footnotesize,showspaces=false}
+
+\begin{document}
+
+\title{Synchronization with monitors}
+
+\author{Jander Nascimento,
+\and Lam Nghiemhai, 
+\and Laurent Graebner}
+
+\maketitle
+
+\tableofcontents
+
+\section{Implementing Thread-safe linked list}          
+
+	\subsection{Validity of the first test}
+		
+		The first test implemented will not fail duo do its verification. The test was written
+		to catch up situations where the simultaneos change would generate a conflict case and
+		the programming running end up in a \textit{deadlock}.
+		This test is completely valid, but the \textit{deadlock} does not happens constantly with 
+		this implementation so we may say that the test is not effective.
+
+	\subsection{Analyzing the first test output}
+
+		Output:
+
+		\begin{lstlisting}
+Thread nmbr 0, won.
+Thread nmbr 1, won.
+THREAD 0 TIME: +0s 0.040ms, TYPE : BEGIN WRITE
+THREAD 0 TIME: +0s 0.041ms, TYPE : END READ
+THREAD 0 TIME: +0s 0.041ms, TYPE : BEGIN READ
+THREAD 0 TIME: +0s 0.041ms, TYPE : END READ
+THREAD 0 TIME: +0s 0.041ms, TYPE : BEGIN WRITE
+THREAD 0 TIME: +0s 0.041ms, TYPE : END READ
+THREAD 0 TIME: +0s 0.041ms, TYPE : BEGIN READ
+THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN WRITE
+THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN READ
+THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN WRITE
+THREAD 0 TIME: +0s 0.042ms, TYPE : END READ
+THREAD 0 TIME: +0s 0.042ms, TYPE : BEGIN READ
+THREAD 0 TIME: +0s 0.043ms, TYPE : END READ
+THREAD 1 TIME: +0s 0.094ms, TYPE : BEGIN WRITE
+THREAD 1 TIME: +0s 0.097ms, TYPE : END READ
+THREAD 1 TIME: +0s 0.097ms, TYPE : BEGIN READ
+THREAD 1 TIME: +0s 0.098ms, TYPE : END READ   
+		\end{lstlisting}
+
+		The consistency of the call can be analyzed looking at three parameters: the identifier of 
+		the thread, type of the call and the order in which they appear in the output.
+
+		For instance, using this output we may infer that there is two threads (and the subject says 
+		that to us:), analysing the thread 0 (zero) it's possible to see that between write operations
+		it's possible to have read operations.
+
+	\subsection{Naive implementation, using mutexes}
+
+		\lstinputlisting[language=C]{reader_writer_1.c}
+
+	\subsection{Naive implementation test}
+
+		The scope of the test is:
+		\begin{itemize}
+		\item Right after a \uppercase{br\_event\_id} \textbf{must} be an \uppercase{er\_event\_id}.
+		\item Right after a \uppercase{bw\_event\_id} \textbf{must} be an \uppercase{ew\_event\_id}.
+		\end{itemize}
+
+		The code excerpt to perform such verification is below. 
+
+		\begin{lstlisting}[language=C]
+void naive_tst(sevent_t events, int size){
+	int x;
+	for(x=0;x<size;x++){
+		int event=events[x].event;
+		int thread=events[x].thread;
+		//In case of an ER/ER just ignore the line, 
+		//they are going to be evaluated by BR/BW
+		if(event==ER_EVENT_ID||event==EW_EVENT_ID) continue;
+		//an event BR MUST BE followed by a ER
+		if(event==BR_EVENT_ID){
+			if(events[x+1].thread!=thread || events[x+1].event!=ER_EVENT_ID){
+				printf("Test FAIL at line #%i!\n",x);
+				exit(EXIT_FAILURE);
+			}
+		}	
+		//an event BW MUST BE followed by a EW
+		if(event==BW_EVENT_ID){
+			if(events[x+1].thread!=thread || events[x+1].event!=EW_EVENT_ID){
+				printf("Test FAIL at line #%i!\n",x);
+				exit(EXIT_FAILURE);
+			}
+		}
+	}
+}		
+		\end{lstlisting}
+
+	\subsection{Efficiency of naive implementation}
+
+		This kind of implementation has the same result as a serialization of all operations, since 
+		only one thread can access the code at a time. That is the main reason why this kind of 
+		implementation is safe.
+
+\section{Improving concurrency}
+
+	\subsection{Improving concurrency capability}
+
+		\lstinputlisting[language=C]{reader_writer_2.c}
+
+	\subsection{Improving concurrency test}
+
+		The scope of the test is:
+		\begin{itemize}
+		\item Right after a \uppercase{bw\_event\_id} \textbf{must} be an \uppercase{ew\_event\_id}.
+		\item Between \uppercase{br\_event\_id} and \uppercase{er\_event\_id} \textbf{must not} exist \uppercase{bw\_event\_id} or \uppercase{ew\_event\_id}.
+		\item There \textbf{must} exist at least two threads performing a reading (\uppercase{br\_event\_id}) at the same time.
+		\end{itemize}
+
+		The code excerpt to perform such verification is below. 
+
+	\begin{lstlisting}
+void concurrence_tst(sevent_t events, int size){
+	int x;
+	//counter for sequencial BR
+	int seq_BR_counter=0;
+	//counter for sequencial ER
+	int seq_ER_counter=0;
+	for(x=0;x<size;x++){
+		int event=events[x].event;
+		int thread=events[x].thread;
+		if(event==ER_EVENT_ID||event==EW_EVENT_ID) continue;
+		//Case an event begin read, the next must be end event end read for the same thread
+		if(event==BR_EVENT_ID){
+			int k=0;
+			//There MUST NOT exist a write in reads
+			for(k=x+1;k<size;k++){
+				if(events[k].event==ER_EVENT_ID) break;		
+				if(events[k].event==BW_EVENT_ID || events[k].event==EW_EVENT_ID ){
+					printf("Test FAIL at line #%i\n",x);
+					exit(EXIT_FAILURE);
+				}
+			}
+			//Counts the sequencial readings
+			if(events[x+1].event==event && event==BR_EVENT_ID){
+				seq_BR_counter++;
+			}
+			if(events[x+1].event==event && event==ER_EVENT_ID){
+				seq_ER_counter++;
+			}
+		}	
+		//Case an event begin write, the next must be end event end write for the same thwrite
+		if(event==BW_EVENT_ID){
+			if(events[x+1].thread!=thread||events[x+1].event!=EW_EVENT_ID){
+				printf("Test FAIL at line #%i!\n",x);
+				exit(EXIT_FAILURE);
+			}
+		}
+	}
+	//MUST exist at least one multiple reading
+	if(seq_BR_counter<2 && seq_ER_counter<2){
+		printf("FAIL! No double readings, the output does not proof that multiples readings are allowed!\n");
+		exit(EXIT_FAILURE);
+	}
+}
+	\end{lstlisting}
+
+\section{Improving fairness}	
+
+	\subsection{Fairness detection through the output}
+		
+\begin{lstlisting}
+THREAD 0 TIME: +0s 0.354ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.363ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.366ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.369ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.373ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.377ms, TYPE : END WRITE 
+THREAD 1 TIME: +0s 0.378ms, TYPE : BEGIN WRITE 
+THREAD 1 TIME: +0s 0.383ms, TYPE : END WRITE 
+THREAD 1 TIME: +0s 0.386ms, TYPE : BEGIN READ 
+THREAD 1 TIME: +0s 0.389ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.396ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.402ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.406ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.410ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.413ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.416ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.420ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.424ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.427ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.431ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.434ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.438ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.442ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.445ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.449ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.453ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.456ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.459ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.463ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.466ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.469ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.473ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.476ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.480ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.483ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.487ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.490ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.494ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.498ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.501ms, TYPE : END READ 
+THREAD 0 TIME: +0s 0.505ms, TYPE : BEGIN WRITE 
+THREAD 0 TIME: +0s 0.509ms, TYPE : END WRITE 
+THREAD 0 TIME: +0s 0.513ms, TYPE : BEGIN READ 
+THREAD 0 TIME: +0s 0.516ms, TYPE : END READ
+\end{lstlisting}
+
+As we can see in the output above, the Thread 1 just work in it's time slice in the line 7-10. All
+others time slices belongs to the Thread 0, this characterize unfairness. Since two Threads do not
+share the processor time in a fair manner.
+
+\subsection{Fairness discusion}
+
+Fairness is indeed an important topic in multiple programming. Usually the multiple programming
+is solution for performance issues or even for better user expirience with the software. 
+When the main issue is performance, we should be aware of the fairness situation and others problems related
+to thread synchronization. 
+This issue may affect the solution of the algorithm, turning it even into a bad solution, may be even worst
+than a synchronized solution.
+
+\subsection{Fairness solution}
+
+Our fair solution can be seen in the code below.
+
+code
+
+\end{document}
