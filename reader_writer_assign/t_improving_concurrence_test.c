@@ -50,14 +50,14 @@ void tst(sevent_t events, int size){
 		//Case an event begin read, the next must be end event end read for the same thread
 		if(event==BR_EVENT_ID){
 			if(events[x+1].thread!=thread||events[x+1].event!=ER_EVENT_ID){
-				printf("Test FAIL!\n");
+				printf("Test FAIL at line #%i!\n",x);
 				exit(EXIT_FAILURE);
 			}
 		}	
 		//Case an event begin write, the next must be end event end write for the same thwrite
 		if(event==BW_EVENT_ID){
 			if(events[x+1].thread!=thread||events[x+1].event!=EW_EVENT_ID){
-				printf("Test FAIL!\n");
+				printf("Test FAIL at line #%i!\n",x);
 				exit(EXIT_FAILURE);
 			}
 		}
