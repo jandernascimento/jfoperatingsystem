@@ -7,40 +7,19 @@
 #define EW_EVENT_ID 3
 
 typedef struct{
+  /* ... */
 
 }reader_writer_s, *reader_writer_t;
 
-//typedef struct{
-//    int tid;
-//    int priority;
-//    struct thread_info_s *next;
-//}thread_info_s, *thread_info_t;
-
-//typedef struct{
-//    int tid;
-//    int reads;
-//    int writes;
-//    struct thread_stats_s *next;
-//}thread_stats_s, *thread_stats_t;
-
-typedef struct {
-    int tid;
-    struct waiting_thread_s *next;
-} waiting_thread_s, *waiting_thread_t;
-
-typedef struct {
-    waiting_thread_t first_thread;
-} thread_queue_s, *thread_queue_t;
-
-void init(reader_writer_t rw);
+void init(reader_writer_t rw); 
 
 void begin_read(reader_writer_t rw);
 
-void end_read(reader_writer_t rw);
+void end_read(reader_writer_t rw); 
 
-void begin_write(reader_writer_t rw);
+void begin_write(reader_writer_t rw); 
 
-void end_write(reader_writer_t rw);
+void end_write(reader_writer_t rw); 
 
 
 #endif 	    /* !_READER_WRITER_H_ */

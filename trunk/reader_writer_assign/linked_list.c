@@ -25,6 +25,9 @@ struct linked_list* list_remove(struct linked_list_head *list, int val) {
 }
 
 void list_insert(struct linked_list_head *list, int val){
+  list->sync=malloc(sizeof(reader_writer_s));
+  if(list->sync!=NULL) list->sync->nb=val;
+  
   begin_write(list->sync);
   struct linked_list *new_cell = malloc(sizeof(struct linked_list)); 
   new_cell->next = list->head; 
@@ -35,6 +38,9 @@ void list_insert(struct linked_list_head *list, int val){
 
 int list_exists(struct linked_list_head *list, int val) {
   struct linked_list *p;
+  list->sync=malloc(sizeof(reader_writer_s));
+  if(list->sync!=NULL) list->sync->nb=val;
+
   begin_read(list->sync);
   p=list->head;
   while (p) {
