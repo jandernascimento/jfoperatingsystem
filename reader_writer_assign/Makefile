@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-g -Wall 
-#CFLAGS=-g -Wall -Werror
+#CFLAGS=-g -Wall 
+CFLAGS=-g -Wall -Werror
 LDFLAGS=-lpthread
 
 
@@ -35,6 +35,7 @@ build_all_tests:$(TEST_BIN)
 
 %_test_3:%_test.o $(OBJS) reader_writer_3.o
 	$(CC) $(LDFLAGS) $^ -o $@
+
 
 build: clean report
 	test -d bin/assignment_two/report || mkdir -p bin/assignment_two/report

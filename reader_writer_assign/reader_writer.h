@@ -8,6 +8,7 @@
 
 typedef struct{
   /* ... */
+  int nb;
 
 }reader_writer_s, *reader_writer_t;
 

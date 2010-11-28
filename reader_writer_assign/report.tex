@@ -21,9 +21,10 @@
 
 	\subsection{Validity of the first test}
 		
-		The first test implemented will not fail duo do its verification. The test was written
+		The first test implemented will not fail duo to its verification. The test was written
 		to catch up situations where the simultaneos change would generate a conflict case and
 		the programming running end up in a \textit{deadlock}.
+		
 		This test is completely valid, but the \textit{deadlock} does not happens constantly with 
 		this implementation so we may say that the test is not effective.
 
@@ -230,17 +231,78 @@ share the processor time in a fair manner.
 
 \subsection{Fairness discusion}
 
-Fairness is indeed an important topic in multiple programming. Usually the multiple programming
+Fairness is indeed an important topic in multi-programming. Usually the multi-programming
 is solution for performance issues or even for better user expirience with the software. 
 When the main issue is performance, we should be aware of the fairness situation and others problems related
 to thread synchronization. 
+
 This issue may affect the solution of the algorithm, turning it even into a bad solution, may be even worst
 than a synchronized solution.
 
 \subsection{Fairness solution}
 
-Our fair solution can be seen in the code below.
+The metric used to calculate the fairness is to count, per thread, how was the maximum sequential operations
+performed by this thread. 
 
-code
+For instance, below is an example of an output, the thread A performed 3 write operations sequencially, and 
+thread B only 1 read operation, and thread C, 2 write operations.
+
+\begin{lstlisting}
+THREAD A TIME: +0s 0.Xms, TYPE : BEGIN WRITE 
+THREAD A TIME: +0s 0.Xms, TYPE : END WRITE 
+THREAD A TIME: +0s 0.Xms, TYPE : BEGIN WRITE 
+THREAD A TIME: +0s 0.Xms, TYPE : END WRITE 
+THREAD A TIME: +0s 0.Xms, TYPE : BEGIN WRITE 
+THREAD A TIME: +0s 0.Xms, TYPE : END WRITE 
+THREAD B TIME: +0s 0.Xms, TYPE : BEGIN READ 
+THREAD B TIME: +0s 0.Xms, TYPE : END READ 
+THREAD C TIME: +0s 0.Xms, TYPE : BEGIN WRITE 
+THREAD C TIME: +0s 0.Xms, TYPE : END WRITE 
+THREAD C TIME: +0s 0.Xms, TYPE : BEGIN WRITE 
+THREAD C TIME: +0s 0.Xms, TYPE : END WRITE 
+\end{lstlisting}
+
+	\subsection{Fairness implementation}
+
+	The fairness implementations consist in give priority for the process with has 
+	the lower counter for a given operation (reading or writing). This implementation 
+	give the chance of execution for the thread that had not the same amount of time-slices than 
+	the other threads, ensuring the fairness in the algorithm.
+	
+	An example of the fairness implementation is show below, as we can see, it calculates
+	the mean of sequencial readings and writings per thread. 
+
+\begin{lstlisting}
+...
+#188 THREAD 1 TIME: +0s 12.658ms, TYPE : BEGIN READ 
+#189 THREAD 1 TIME: +0s 12.682ms, TYPE : END READ 
+#190 THREAD 0 TIME: +0s 12.921ms, TYPE : BEGIN READ 
+#191 THREAD 0 TIME: +0s 12.946ms, TYPE : END READ 
+#192 THREAD 2 TIME: +0s 13.040ms, TYPE : BEGIN READ 
+#193 THREAD 2 TIME: +0s 13.067ms, TYPE : END READ 
+#194 THREAD 4 TIME: +0s 13.222ms, TYPE : BEGIN READ 
+#195 THREAD 4 TIME: +0s 13.246ms, TYPE : END READ 
+#196 THREAD 3 TIME: +0s 13.334ms, TYPE : BEGIN WRITE 
+#197 THREAD 3 TIME: +0s 13.359ms, TYPE : END WRITE 
+#198 THREAD 3 TIME: +0s 13.391ms, TYPE : BEGIN READ 
+#199 THREAD 3 TIME: +0s 13.417ms, TYPE : END READ 
+Max amount of sequencial operation by thread:
+THREAD 0 Reading:1 Writing:1
+THREAD 1 Reading:1 Writing:1
+THREAD 2 Reading:1 Writing:1
+THREAD 3 Reading:2 Writing:2
+THREAD 4 Reading:1 Writing:1
+Mean read=1.000000 Mean write=1.000000
+\end{lstlisting}
+
+		An interpretation of the line 18 is: Thread 3 executed 2 reading sequencially and 
+		its time-slice ended, and the same happened with writing operation for the same thread.
+		
+		The scope of the test is:
+		\begin{itemize}
+		\item Ensures that the mean of sequencial readings by thread is less or equal than 3.
+		\item Ensures that the mean of sequencial writings by thread is less or equal than 3.
+		\end{itemize}
+
 
 \end{document}
