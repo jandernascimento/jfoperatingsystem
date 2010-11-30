@@ -45,7 +45,6 @@ build: clean report
 
 report: 
 	-pdflatex report.tex
-	rm report.aux report.log report.toc 	
 
 clean:
 	rm -rf	echo *.o $(TEST_BIN)
